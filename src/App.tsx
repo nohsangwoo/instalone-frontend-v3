@@ -6,6 +6,9 @@ import NotFound from './screens/NotFound';
 import { isLoggedInVar } from './apollo';
 
 function App() {
+  // isLoggedInVar는 apollo.tsx파일에서 makeVar를 이용하여 선언됐지만
+  // 이것을 react components전체에서 사용하고싶다면 이런식으로 hook설정을 해주면됨
+  // 이제 하위 컴포넌트 어디서든 isLoggedInVar(true)이런 형식으로 사용 가능
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   return (
     <Router>

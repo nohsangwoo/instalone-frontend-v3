@@ -49,3 +49,11 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 # 8.6 Reactive Variables
 
 - 사용법
+
+1. makeVar를 이용하여 선언
+2. app.tsx파일(최상단 경로)에서 useReactiveVar로 hooks설정해줌
+3. 어디서든 선언된 변수명(설정하고싶은 값)형식으로 사용가능
+<!-- isLoggedInVar(false) -->
+
+- cache 기능등 참고
+  https://github.com/apollographql/ac3-state-management-examples/tree/master/apollo-local-state/src
