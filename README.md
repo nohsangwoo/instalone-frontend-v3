@@ -35,3 +35,12 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
   "react-hook-form": "^6.15.1",
   "react-router-dom": "^5.2.0",
   "styled-components": "^5.2.1",
+
+# 8.2 What Does Setup Mean?
+
+- [x] Router
+- [ ] Authentication
+- [ ] Arch.
+- [ ] Styles
+
+# 8.3 Router Setup part
