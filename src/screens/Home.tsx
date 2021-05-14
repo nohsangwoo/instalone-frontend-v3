@@ -1,7 +1,9 @@
 import React from 'react';
-
-function Home() {
-  return <h1>Home</h1>;
+type Props = {
+  setIsLoggedIn: (args: boolean) => void;
+};
+function Home(props: Props) {
+  return <div>Home</div>;
 }
 
 export default Home;

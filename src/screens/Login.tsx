@@ -1,6 +1,10 @@
 import React from 'react';
 
-function Login() {
+type Props = {
+  setIsLoggedIn: (args: boolean) => void;
+};
+
+function Login(props: Props) {
   return <div>Plz. Login</div>;
 }
 
