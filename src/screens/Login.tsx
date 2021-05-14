@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// typescript 적용한 styled global theme 사용법
 
 // import { isLoggedInVar } from '../apollo';
 

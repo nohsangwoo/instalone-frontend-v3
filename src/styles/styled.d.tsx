@@ -1,5 +1,6 @@
 // src/assets/styles/styled.d.ts
 import 'styled-components';
+// 여기 styled theme - typescript 적용
 
 declare module 'styled-components' {
   export interface DefaultTheme {

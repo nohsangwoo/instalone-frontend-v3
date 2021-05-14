@@ -7,6 +7,7 @@ import { darkModeVar, isLoggedInVar } from './apollo';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/styles';
 import { lightTheme, darkTheme } from './styles/theme';
+// 여기 styled theme - typescript 적용
 function App() {
   // isLoggedInVar는 apollo.tsx파일에서 makeVar를 이용하여 선언됐지만
   // 이것을 react components전체에서 사용하고싶다면 이런식으로 hook설정을 해주면됨
