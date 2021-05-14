@@ -1,12 +1,10 @@
-import React from 'react';
-type Props = {
-  setIsLoggedIn: (args: boolean) => void;
-};
-function Home({ setIsLoggedIn }: Props) {
+import { isLoggedInVar } from '../apollo';
+
+function Home() {
   return (
     <div>
       <h1>Home</h1>
-      <button onClick={() => setIsLoggedIn(false)}>Log out Now!</button>
+      <button onClick={() => isLoggedInVar(false)}>Log out Now!</button>
     </div>
   );
 }

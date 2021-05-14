@@ -39,8 +39,13 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 # 8.2 What Does Setup Mean?
 
 - [x] Router
-- [ ] Authentication
-- [ ] Arch.
+- [x] Authentication
+- [x] Arch.
 - [ ] Styles
+- [ ] Log In
 
 # 8.3 Router Setup part
+
+# 8.6 Reactive Variables
+
+- 사용법
