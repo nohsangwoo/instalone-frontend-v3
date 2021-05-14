@@ -2,11 +2,9 @@
 import 'styled-components';
 
 declare module 'styled-components' {
-  type chageColor = '#2c2c2c' | 'lightgray';
-
   export interface DefaultTheme {
-    fontColor?: chageColor;
-    bgColor?: chageColor;
+    fontColor?: '#2c2c2c' | 'lightgray';
+    bgColor?: '#2c2c2c' | 'lightgray';
 
     colors?: {
       main: string;
