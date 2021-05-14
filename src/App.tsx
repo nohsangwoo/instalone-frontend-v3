@@ -5,17 +5,8 @@ import Login from './screens/Login';
 import NotFound from './screens/NotFound';
 import { darkModeVar, isLoggedInVar } from './apollo';
 import { ThemeProvider } from 'styled-components';
-
-const lightTheme = {
-  fontColor: '#2c2c2c',
-  bgColor: 'lightgray',
-};
-
-const darkTheme = {
-  fontColor: 'lightgray',
-  bgColor: '#2c2c2c',
-};
-
+import { GlobalStyles } from './styles/styles';
+import { lightTheme, darkTheme } from './styles/theme';
 function App() {
   // isLoggedInVar는 apollo.tsx파일에서 makeVar를 이용하여 선언됐지만
   // 이것을 react components전체에서 사용하고싶다면 이런식으로 hook설정을 해주면됨
@@ -24,6 +15,7 @@ function App() {
   const darkMode = useReactiveVar(darkModeVar);
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <GlobalStyles />
       <Router>
         <Switch>
           <Route path="/" exact>

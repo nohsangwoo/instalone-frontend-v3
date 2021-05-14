@@ -41,8 +41,8 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 - [x] Router
 - [x] Authentication
 - [x] Arch.
-- [ ] Styles
-- [ ] Log In
+- [x] Styles
+- [ ] Log In / Sign Up
 
 # 8.3 Router Setup part
 
@@ -57,3 +57,7 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 
 - cache 기능등 참고
   https://github.com/apollographql/ac3-state-management-examples/tree/master/apollo-local-state/src
+
+# 8.9 GlobalStyles on Styled Components
+
+- apply styled-reset
