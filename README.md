@@ -61,3 +61,18 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 # 8.9 GlobalStyles on Styled Components
 
 - apply styled-reset
+
+# typescript for graphql
+
+- npm install -g apollo
+  apollo client:codegen
+  https://github.com/apollographql/apollo-tooling#apollo-clientcodegen-output 참고
+- graphql 서버에서 스키마를 다운로드 받아 적용할것임
+- configuration파일 생성 (apollo.config.js)
+  https://www.apollographql.com/docs/devtools/apollo-config/
+
+- 백엔드에서 스키마 끌어오기
+
+```
+apollo client:codegen src/__generated__ --target=typescript --outputFlat
+```

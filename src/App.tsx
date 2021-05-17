@@ -14,6 +14,7 @@ function App() {
   // 이제 하위 컴포넌트 어디서든 isLoggedInVar(true)이런 형식으로 사용 가능
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const darkMode = useReactiveVar(darkModeVar);
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
