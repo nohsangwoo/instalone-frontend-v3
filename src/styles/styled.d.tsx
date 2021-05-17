@@ -7,10 +7,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     fontColor?: '#2c2c2c' | 'lightgray' | 'white';
     bgColor?: '#2c2c2c' | 'lightgray' | 'white';
-
-    colors?: {
-      main: string;
-      sub: string;
-    };
+    accent?: '#0095f6';
+    borderColor?: 'rgb(219, 219, 219)';
   }
 }
