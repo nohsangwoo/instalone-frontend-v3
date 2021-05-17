@@ -64,6 +64,7 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 
 # typescript for graphql
 
+- 적용하려면 백엔드가 typescript로 작성돼있어야함
 - npm install -g apollo
   apollo client:codegen
   https://github.com/apollographql/apollo-tooling#apollo-clientcodegen-output 참고
@@ -76,3 +77,9 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 ```
 apollo client:codegen src/__generated__ --target=typescript --outputFlat
 ```
+
+# 10.1 Login UI Clone (18:40)
+
+- [ ] Feed
+- [ ] Profile
+- [ ] See Hashtag
