@@ -30,7 +30,11 @@ type FormData = {
 };
 
 const Login = (): JSX.Element => {
-  const { register, handleSubmit } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<FormData>();
   const onSubmitValid = (data: FormData): void => {
     console.log('data: ', data);
   };
@@ -52,11 +56,15 @@ const Login = (): JSX.Element => {
           <Input
             {...register('username', {
               required: 'Username is required',
-              minLength: 5,
+              minLength: {
+                value: 4,
+                message: 'You must enter at least 4 characters',
+              },
             })}
             type="text"
             placeholder="Username"
           />
+          {/* {errors.username && <p>{errors.username.message}</p>} */}
           <Input
             {...register('password', {
               required: 'Password is required.',
@@ -64,6 +72,7 @@ const Login = (): JSX.Element => {
             type="password"
             placeholder="Password"
           />
+          {/* {errors.password && <p>{errors.password.message}</p>} */}
           <Button type="submit" value="Log in" />
         </form>
         <Separator />
