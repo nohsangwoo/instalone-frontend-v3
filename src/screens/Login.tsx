@@ -65,6 +65,8 @@ const Login = (): JSX.Element => {
       });
     }
   };
+
+  // login이란 이름의 mutation trigger를 생성한다
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted,
   });
