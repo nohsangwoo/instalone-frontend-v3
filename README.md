@@ -130,3 +130,7 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
     ...
   )
 ```
+
+# 10.9 Apollo Client
+
+- backend와 연결
