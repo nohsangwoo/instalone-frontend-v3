@@ -53,7 +53,9 @@ const Login = (): JSX.Element => {
     mode: 'onChange',
   });
 
-  const onCompleted = (data: any) => {
+  const onCompleted = (data: {
+    login: { ok: string; error: string; token: string };
+  }) => {
     const {
       login: { ok, error, token },
     } = data;
