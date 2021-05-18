@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import {
   faFacebookSquare,
   faInstagram,
@@ -9,6 +10,7 @@ import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
 import Button from '../components/auth/Button';
 import FormBox from '../components/auth/FormBox';
+import FormError from '../components/auth/FormError';
 import Input from '../components/auth/Input';
 import Separator from '../components/auth/Separator';
 import routes from '../routes';
@@ -27,21 +29,59 @@ const FacebookLogin = styled.div`
 type FormData = {
   username: string;
   password: string;
+  result?: string;
 };
+
+const LOGIN_MUTATION = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      ok
+      token
+      error
+    }
+  }
+`;
 
 const Login = (): JSX.Element => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
-  } = useForm<FormData>();
+    formState: { errors, isValid },
+    getValues,
+    setError,
+  } = useForm<FormData>({
+    mode: 'onChange',
+  });
+
+  const onCompleted = (data: any) => {
+    const {
+      login: { ok, error, token },
+    } = data;
+    if (!ok) {
+      setError('result', {
+        message: error,
+      });
+    }
+  };
+  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+    onCompleted,
+  });
+
   const onSubmitValid = (data: FormData): void => {
-    console.log('data: ', data);
+    if (loading) {
+      return;
+    }
+    const { username, password } = getValues();
+    login({
+      variables: { username, password },
+    });
   };
 
   const onSubmitInvalid = (data: Record<string, any>): void => {
     console.log(data, 'invalid');
   };
+
+  console.log('errors', errors);
   return (
     <AuthLayout>
       <PageTitle title="Login" />
@@ -73,7 +113,12 @@ const Login = (): JSX.Element => {
             placeholder="Password"
           />
           {/* {errors.password && <p>{errors.password.message}</p>} */}
-          <Button type="submit" value="Log in" />
+          <Button
+            type="submit"
+            value={loading ? 'Loading...' : 'Log in'}
+            disabled={!isValid || loading}
+          />
+          <FormError message={errors?.result?.message} />
         </form>
         <Separator />
         <FacebookLogin>
