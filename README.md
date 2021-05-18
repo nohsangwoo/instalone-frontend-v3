@@ -95,3 +95,38 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 
 - react hook form 사용법
   https://react-hook-form.com/
+
+# 일반 react form Typescript 적용 예시
+
+```
+  <!-- typescript 적용 예시 -->
+  const [username, setUsername] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsernameError('');
+    setUsername(event.target.value);
+  };
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (username === '') {
+      setUsernameError('Not empty pls.');
+    }
+    if (username.length < 10) {
+      setUsernameError('too short');
+    }
+  };
+  .....
+  .....
+
+  return(
+    <form onSubmit={handleSubmit}>
+      {usernameError}
+      <Input
+        onChange={onUsernameChange}
+        value={username}
+        type="text"
+        placeholder="Username"
+    />
+    ...
+  )
+```
