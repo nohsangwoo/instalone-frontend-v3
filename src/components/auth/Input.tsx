@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const SInput = styled.input`
+const SInput = styled.input<{
+  theme: {
+    borderColor: string;
+  };
+}>`
   width: 100%;
   border-radius: 3px;
   padding: 7px;
@@ -14,11 +18,13 @@ const SInput = styled.input`
 `;
 
 type Props = {
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
 };
 
-function Input(props: Props) {
+const Input = (props: Props): JSX.Element => {
   return <SInput {...props} />;
-}
+};
 export default Input;

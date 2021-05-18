@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
-type Props = {
+export const BaseBox = styled.div<{
   theme: {
     borderColor: string;
   };
-};
-
-export const BaseBox = styled.div<Props>`
+}>`
   background-color: white;
   border: 1px solid ${props => props.theme.borderColor};
   width: 100%;

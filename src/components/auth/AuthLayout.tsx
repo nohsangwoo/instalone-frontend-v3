@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   max-width: 350px;
   width: 100%;
 `;
+
 type Props = {
   children: React.ReactNode;
 };

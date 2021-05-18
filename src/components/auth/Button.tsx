@@ -14,7 +14,8 @@ const SButton = styled.input`
 `;
 type Props = {
   type: string;
-  value: string;
+  value?: string;
+  disabled?: boolean;
 };
 function Button(props: Props) {
   return <SButton {...props} />;

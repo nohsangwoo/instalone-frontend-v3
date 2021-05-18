@@ -21,7 +21,7 @@ const Subtitle = styled(FatLink)`
   margin-top: 10px;
 `;
 
-function SingUp() {
+function SingUp(): JSX.Element {
   return (
     <AuthLayout>
       <FormBox>

@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { BaseBox } from '../shared';
-const SBottomBox = styled(BaseBox)`
+
+const SBottomBox = styled(BaseBox)<{
+  theme: {
+    accent: string;
+  };
+}>`
   padding: 20px 0px;
   text-align: center;
   a {
@@ -17,7 +22,7 @@ type Props = {
   linkText: string;
 };
 
-function BottomBox({ cta, link, linkText }: Props) {
+function BottomBox({ cta, link, linkText }: Props): JSX.Element {
   return (
     <SBottomBox>
       <span>{cta}</span>

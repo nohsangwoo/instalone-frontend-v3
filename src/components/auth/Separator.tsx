@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const SSeparator = styled.div`
+const SSeparator = styled.div<{
+  theme: {
+    borderColor: string;
+  };
+}>`
   margin: 20px 0px 30px 0px;
   text-transform: uppercase;
   display: flex;
