@@ -1,4 +1,9 @@
-const routes = {
+type Routes = {
+  home: '/';
+  signUp: '/sign-up';
+};
+
+const routes: Routes = {
   home: '/',
   signUp: '/sign-up',
 };

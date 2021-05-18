@@ -10,6 +10,7 @@ const SButton = styled.input`
   padding: 8px 0px;
   font-weight: 600;
   width: 100%;
+  cursor: pointer;
 `;
 type Props = {
   type: string;

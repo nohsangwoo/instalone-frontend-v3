@@ -17,8 +17,11 @@ const Container = styled(BaseBox)`
     align-items: center;
   }
 `;
+type Props = {
+  children: React.ReactNode;
+};
 
-function FormBox({ children }: any) {
+function FormBox({ children }: Props) {
   return <Container>{children}</Container>;
 }
 export default FormBox;
