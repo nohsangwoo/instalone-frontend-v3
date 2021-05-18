@@ -3,7 +3,6 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
@@ -12,6 +11,7 @@ import FormBox from '../components/auth/FormBox';
 import Input from '../components/auth/Input';
 import Separator from '../components/auth/Separator';
 import routes from '../routes';
+import PageTitle from '../components/PageTitle';
 // typescript 적용한 styled global theme 사용법
 
 // import { isLoggedInVar } from '../apollo';
@@ -32,41 +32,46 @@ const FacebookLogin = styled.div`
 `;
 
 const Login = (): JSX.Element => {
-  const [username, setUsername] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsernameError('');
-    setUsername(event.target.value);
-  };
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (username === '') {
-      setUsernameError('Not empty pls.');
-    }
-    if (username.length < 10) {
-      setUsernameError('too short');
-    }
-  };
+  // typescript 적용 예시
+  // const [username, setUsername] = useState('');
+  // const [usernameError, setUsernameError] = useState('');
+  // const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setUsernameError('');
+  //   setUsername(event.target.value);
+  // };
+  // const handleSubmit = (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   if (username === '') {
+  //     setUsernameError('Not empty pls.');
+  //   }
+  //   if (username.length < 10) {
+  //     setUsernameError('too short');
+  //   }
+  // };
   return (
     <AuthLayout>
+      <PageTitle title="Login" />
       <FormBox>
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           {usernameError}
           <Input
             onChange={onUsernameChange}
             value={username}
             type="text"
             placeholder="Username"
-          />
+          /> */}
+        <form>
+          <Input type="text" placeholder="Username" />
           <Input type="password" placeholder="Password" />
-          <Button
+          {/* <Button
             type="submit"
             value="Log in"
             disabled={username === '' && username.length < 10}
-          />
+          /> */}
+          <Button type="submit" value="Log in" />
         </form>
         <Separator />
         <FacebookLogin>
