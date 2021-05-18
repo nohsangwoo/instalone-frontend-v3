@@ -3,6 +3,7 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
@@ -12,16 +13,6 @@ import Input from '../components/auth/Input';
 import Separator from '../components/auth/Separator';
 import routes from '../routes';
 import PageTitle from '../components/PageTitle';
-// typescript 적용한 styled global theme 사용법
-
-// import { isLoggedInVar } from '../apollo';
-
-// type TitleStyleProps = {
-//   potato: boolean;
-// };
-// const Title = styled.h1<TitleStyleProps>`
-//   color: ${props => props.theme.fontColor};
-// `;
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -30,6 +21,22 @@ const FacebookLogin = styled.div`
     font-weight: 600;
   }
 `;
+
+// Types to be entered in form
+// also Data type when invalid
+type FormData = {
+  username?: string;
+  password?: string;
+};
+
+// Data type when valid
+type FieldError = {
+  FormData: {
+    type: 'minLength' | 'required';
+    ref: HTMLInputElement;
+    message: string;
+  };
+};
 
 const Login = (): JSX.Element => {
   // typescript 적용 예시
@@ -48,6 +55,15 @@ const Login = (): JSX.Element => {
   //     setUsernameError('too short');
   //   }
   // };
+
+  const { register, handleSubmit } = useForm<FormData>();
+  const onSubmitValid = (data: FieldError): void => {
+    console.log('data: ', data);
+  };
+
+  const onSubmitInvalid = (data: any): void => {
+    console.log(data, 'invalid');
+  };
   return (
     <AuthLayout>
       <PageTitle title="Login" />
@@ -63,14 +79,25 @@ const Login = (): JSX.Element => {
             type="text"
             placeholder="Username"
           /> */}
-        <form>
-          <Input type="text" placeholder="Username" />
-          <Input type="password" placeholder="Password" />
-          {/* <Button
-            type="submit"
-            value="Log in"
-            disabled={username === '' && username.length < 10}
-          /> */}
+
+        {/* handleSubmit의 첫번째 인자는 입력의 조건에 맞을때, 
+        두번째 인자는 조건에 맞지 않는 입력값을 받았을때 */}
+        <form onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}>
+          <Input
+            {...register('username', {
+              required: 'Username is required',
+              minLength: 5,
+            })}
+            type="text"
+            placeholder="Username"
+          />
+          <Input
+            {...register('password', {
+              required: 'Password is required.',
+            })}
+            type="password"
+            placeholder="Password"
+          />
           <Button type="submit" value="Log in" />
         </form>
         <Separator />
