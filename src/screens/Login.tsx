@@ -54,7 +54,6 @@ const Login = (): JSX.Element => {
     useLocation<
       Location & { username: string; password: string; message: string }
     >();
-  console.log(location?.state);
 
   //useForm 사용법
   const {

@@ -155,3 +155,7 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 
 - 로그인 한 상태의 home에서 최상위 레이아웃 설계
 - navigation..
+
+# 11.1 Header part Two
+
+- header 부분 아이콘 추가 및 마무리

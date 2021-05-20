@@ -9,7 +9,6 @@ import { GlobalStyles } from './styles/globalStyles';
 import { lightTheme, darkTheme } from './styles/theme';
 import SignUp from './screens/SignUp';
 import { HelmetProvider } from 'react-helmet-async';
-import Header from './components/Header';
 import Layout from './components/Layout';
 // 여기 styled theme - typescript 적용
 function App() {
