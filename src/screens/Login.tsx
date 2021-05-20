@@ -31,7 +31,6 @@ const FacebookLogin = styled.div`
 type FormData = {
   username: string;
   password: string;
-  result?: string;
 };
 
 const LOGIN_MUTATION = gql`
@@ -57,7 +56,7 @@ const Login = (): JSX.Element => {
     mode: 'onChange',
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
-  useEffect(() => {}, [errorMessage, setErrorMessage]);
+  // useEffect(() => {}, [errorMessage, setErrorMessage]);
 
   const onCompleted = (data: {
     login: { ok: string; error: string; token: string }; // for typescript
