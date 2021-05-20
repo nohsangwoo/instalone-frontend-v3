@@ -134,3 +134,11 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 # 10.9 Apollo Client
 
 - backend와 연결
+
+# 10.11 Login part Two
+
+- useForm과 apollo hook, apollo reactive variable, localStorage등을 이용하여 로그인 상태 관리
+- https://www.youtube.com/watch?v=ZBfBiwyR2HY 참고
+
+- onChange 사용시 react hooks form 이 깨져버리는? 상태 발생
+- setError 사용법 연구 필요

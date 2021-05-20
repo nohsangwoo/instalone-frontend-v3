@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import {
   faFacebookSquare,
@@ -6,6 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { logUserIn } from '../apollo';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
 import Button from '../components/auth/Button';
@@ -43,31 +45,38 @@ const LOGIN_MUTATION = gql`
 `;
 
 const Login = (): JSX.Element => {
+  //useForm 사용법
   const {
     register,
     handleSubmit,
+    // formState: { isValid },
     formState: { errors, isValid },
     getValues,
-    setError,
+    // setError,
   } = useForm<FormData>({
     mode: 'onChange',
   });
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  useEffect(() => {}, [errorMessage, setErrorMessage]);
 
   const onCompleted = (data: {
-    login: { ok: string; error: string; token: string };
+    login: { ok: string; error: string; token: string }; // for typescript
   }) => {
     const {
       login: { ok, error, token },
     } = data;
     if (!ok) {
-      setError('result', {
-        message: error,
-      });
+      setErrorMessage(error);
+    }
+    // 만약 토큰이 존재하면 logUserIn에 toke값을 넘겨주고 로그인 성공 절차를 진행한다.
+    if (token) {
+      logUserIn(token);
     }
   };
 
-  // login이란 이름의 mutation trigger를 생성한다
+  // apollo mutation hook생성
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+    // mutation작업이 성공했다면 실행하는 함수
     onCompleted,
   });
 
@@ -76,6 +85,7 @@ const Login = (): JSX.Element => {
       return;
     }
     const { username, password } = getValues();
+    // apollo mutation hook 사용방법
     login({
       variables: { username, password },
     });
@@ -85,7 +95,6 @@ const Login = (): JSX.Element => {
     console.log(data, 'invalid');
   };
 
-  console.log('errors', errors);
   return (
     <AuthLayout>
       <PageTitle title="Login" />
@@ -105,24 +114,26 @@ const Login = (): JSX.Element => {
                 message: 'You must enter at least 4 characters',
               },
             })}
+            // onChange={clearLoginError}
             type="text"
             placeholder="Username"
           />
-          {/* {errors.username && <p>{errors.username.message}</p>} */}
           <Input
             {...register('password', {
               required: 'Password is required.',
             })}
+            // onChange={clearLoginError}
             type="password"
             placeholder="Password"
           />
-          {/* {errors.password && <p>{errors.password.message}</p>} */}
           <Button
             type="submit"
             value={loading ? 'Loading...' : 'Log in'}
             disabled={!isValid || loading}
           />
-          <FormError message={errors?.result?.message} />
+          <FormError message={errorMessage} />
+          <FormError message={errors?.username?.message} />
+          <FormError message={errors?.password?.message} />
         </form>
         <Separator />
         <FacebookLogin>
