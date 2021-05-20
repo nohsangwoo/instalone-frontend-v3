@@ -162,4 +162,5 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 
 # 11.2 Header part Three
 
-- localStorage에 저장된 token을 꺼내다 우리의 http의 header에 넣어서 사용하기위해서 설정
+- localStorage에 저장된 token을 꺼내다 우리의 http의 header에 넣어서 사용하기위한 설정
+- 사용자가 브라우저에서 전달받은 토큰을 변경하여 장난치면 바로 로그아웃됨
