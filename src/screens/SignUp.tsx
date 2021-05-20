@@ -3,6 +3,7 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { History } from 'history';
 import styled from 'styled-components';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
@@ -25,6 +26,7 @@ const Subtitle = styled(FatLink)`
   margin-top: 10px;
 `;
 
+// 사용하기위한 트리거 생성
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount(
     $firstName: String!
@@ -56,9 +58,14 @@ type FormData = {
 
 function SingUp(): JSX.Element {
   const history = useHistory();
+
+  // mutation실행 후 실행되는 함수
   const onCompleted = (data: {
+    // react hook form 에서 submit 한 후 순간 입력된 값에서 추출
     createAccount: { ok: string; error: string };
   }) => {
+    const { username, password } = getValues();
+
     const {
       createAccount: { ok, error },
     } = data;
@@ -66,22 +73,35 @@ function SingUp(): JSX.Element {
     if (!ok) {
       return;
     }
-    history.push(routes.home);
+    history.push(routes.home, {
+      message: 'Account created. Please log in.',
+      username,
+      password,
+    });
   };
+
+  // mutation apollo hook 생성
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
+    // mutation실행 후 실행되는 함수
     onCompleted,
   });
+
+  // useForm을 사용하기위한 세팅
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    getValues,
   } = useForm({
     mode: 'onChange',
   });
+
+  // react hooks form에서 submit됐을때 실행되는 함수
   const onSubmitValid = (data: FormData) => {
     if (loading) {
       return;
     }
+    // 만들어진 apollo mutation hooks에 변수를 전달하면서 사용하는 방법
     createAccount({
       variables: {
         ...data,
@@ -99,6 +119,7 @@ function SingUp(): JSX.Element {
             Sign up to see photos and videos from your friends.
           </Subtitle>
         </HeaderContainer>
+        {/* form의 Onsubmit을 react hooks form의 handleSubmit 과 연결해줌으로 이제 hooks form 사용설정됨*/}
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             {...register('firstName', {

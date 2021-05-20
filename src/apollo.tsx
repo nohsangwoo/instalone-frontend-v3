@@ -18,7 +18,7 @@ export const logUserIn = (token: string) => {
 // localStorage에 저장된 token을 제거하고 reactive variable에서 isLoggedInvar를 false로 설정해준다
 export const logUserOut = () => {
   localStorage.removeItem(TOKEN);
-  isLoggedInVar(false);
+  window.location.reload();
 };
 
 // darkMode의 상태를 위한 reactive variable

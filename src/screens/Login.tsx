@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import {
   faFacebookSquare,
@@ -6,6 +6,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
+import { Location } from 'history';
 import styled from 'styled-components';
 import { logUserIn } from '../apollo';
 import AuthLayout from '../components/auth/AuthLayout';
@@ -33,6 +35,10 @@ type FormData = {
   password: string;
 };
 
+const Notification = styled.div`
+  color: #2ecc71;
+`;
+
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -44,6 +50,12 @@ const LOGIN_MUTATION = gql`
 `;
 
 const Login = (): JSX.Element => {
+  const location =
+    useLocation<
+      Location & { username: string; password: string; message: string }
+    >();
+  console.log(location?.state);
+
   //useForm 사용법
   const {
     register,
@@ -54,6 +66,10 @@ const Login = (): JSX.Element => {
     // setError,
   } = useForm<FormData>({
     mode: 'onChange',
+    defaultValues: {
+      username: location?.state?.username || '',
+      password: location?.state?.password || '',
+    },
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
   // useEffect(() => {}, [errorMessage, setErrorMessage]);
@@ -101,6 +117,7 @@ const Login = (): JSX.Element => {
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
+        <Notification>{location?.state?.message}</Notification>
 
         {/* handleSubmit의 첫번째 인자는 입력의 조건에 맞을때, 
         두번째 인자는 조건에 맞지 않는 입력값을 받았을때 */}
