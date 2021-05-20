@@ -169,3 +169,9 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 
 - 내가 해당 feed에 like를 했는지 여부
 - like테이블에서 연결된 photoId와 userId를 찾아서 해당조건에 만족하는 like가 있으면 true를 반환하고 없으면 false를 반환한다.
+
+# onClick 으로 Mutation 실행하려면 새로운 함수안에서 호출 하는게 편함
+
+# 11.7 Liking Photos
+
+- like unlike기능인 ToggleLike를 실행
