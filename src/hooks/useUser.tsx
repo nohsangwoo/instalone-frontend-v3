@@ -20,7 +20,7 @@ function useUser() {
     skip: !hasToken,
   });
   // user가 token을 가지고 있다면 me query를 실행하고 결과값을 전달 받는다
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
     // data를 전달받은 상황에서 data.me의 값이 null이라면 logUserOut()을 실행한다
     if (data?.me === null) {
