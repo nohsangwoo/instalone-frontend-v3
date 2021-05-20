@@ -150,3 +150,8 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 # 10.14 Dark Mode
 
 - darkmode세팅
+
+# 11.0 Header and Layout
+
+- 로그인 한 상태의 home에서 최상위 레이아웃 설계
+- navigation..

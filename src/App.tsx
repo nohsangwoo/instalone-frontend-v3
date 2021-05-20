@@ -9,6 +9,8 @@ import { GlobalStyles } from './styles/globalStyles';
 import { lightTheme, darkTheme } from './styles/theme';
 import SignUp from './screens/SignUp';
 import { HelmetProvider } from 'react-helmet-async';
+import Header from './components/Header';
+import Layout from './components/Layout';
 // 여기 styled theme - typescript 적용
 function App() {
   // isLoggedInVar는 apollo.tsx파일에서 makeVar를 이용하여 선언됐지만
@@ -25,7 +27,13 @@ function App() {
           <Router>
             <Switch>
               <Route path="/" exact>
-                {isLoggedIn ? <Home /> : <Login />}
+                {isLoggedIn ? (
+                  <Layout>
+                    <Home />
+                  </Layout>
+                ) : (
+                  <Login />
+                )}
               </Route>
               {!isLoggedIn ? (
                 <Route path="/sign-up">
