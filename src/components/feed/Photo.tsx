@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as SolidHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from '../Avatar';
 import { FatText } from '../shared';
@@ -52,6 +51,7 @@ const PhotoActions = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
   div {
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@ type Props = {
   id: number;
   user: {
     username: string;
-    avatar: string;
+    avatar?: string;
   };
   file: string;
   caption: string;
@@ -86,12 +86,11 @@ type Props = {
   isLiked: boolean;
 };
 
-type toggleLikeInputValue = {
-  id: number;
-};
 function Photo({ id, user, file, isLiked, likes }: Props) {
   const [toggleLikeMutation, { loading }] = useMutation<
-    { toggleLike: toggleLikeInputValue },
+    //   트리거에서 전달 받는 인자
+    { toggleLike: { id: number } },
+    // hooks에서(여기서) 전달 하는 인자
     { id: number }
   >(TOGGLE_LIKE_MUTATION, {
     variables: {
@@ -99,8 +98,9 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
     },
   });
 
-  const testFunc = () => {
-    console.log('test');
+  console.log('loading', loading);
+
+  const tpggleLikeFunc = () => {
     toggleLikeMutation();
   };
   return (
@@ -113,7 +113,7 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
       <PhotoData>
         <PhotoActions>
           <div>
-            <PhotoAction onClick={testFunc}>
+            <PhotoAction onClick={tpggleLikeFunc}>
               <FontAwesomeIcon
                 style={{ color: isLiked ? 'tomato' : 'inherit' }}
                 icon={isLiked ? SolidHeart : faHeart}
@@ -136,14 +136,4 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
   );
 }
 
-Photo.propTypes = {
-  id: PropTypes.number.isRequired,
-  user: PropTypes.shape({
-    avatar: PropTypes.string,
-    username: PropTypes.string.isRequired,
-  }),
-  file: PropTypes.string.isRequired,
-  isLiked: PropTypes.bool.isRequired,
-  likes: PropTypes.number.isRequired,
-};
 export default Photo;
