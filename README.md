@@ -164,3 +164,8 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 
 - localStorage에 저장된 token을 꺼내다 우리의 http의 header에 넣어서 사용하기위한 설정
 - 사용자가 브라우저에서 전달받은 토큰을 변경하여 장난치면 바로 로그아웃됨
+
+# 11.6 isLiked
+
+- 내가 해당 feed에 like를 했는지 여부
+- like테이블에서 연결된 photoId와 userId를 찾아서 해당조건에 만족하는 like가 있으면 true를 반환하고 없으면 false를 반환한다.
