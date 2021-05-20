@@ -175,3 +175,20 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 # 11.7 Liking Photos
 
 - like unlike기능인 ToggleLike를 실행
+
+# 11.8 Refetching Queries
+
+- updating apollo cache
+- useMutation의 인자중 refetchQueries를 뽑아서 사용
+
+```
+const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
+    variables: {
+      id,
+    },
+    refetchQueries:[FEED_QUERY,variable:{enter variable...}] <== 요렇게 사용한다
+  });
+```
+
+- mutation이 완료된 이후 refetchQueries를 실행하여 말그대로 해당쿼리내용을 다시 fetch하는 것
+- 해당 쿼리를 완전히 다시 실행하는것과 동일한 작업이기때문에 좋은 방법은 아님 (귀찮을때 사용)
