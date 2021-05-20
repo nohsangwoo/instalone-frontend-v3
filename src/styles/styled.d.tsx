@@ -5,9 +5,9 @@ import 'styled-components';
 declare module 'styled-components' {
   // DefaultTheme에 대한 interface를 적어두면 DefaultTheme사용시 type정책 사용가능
   export interface DefaultTheme {
-    fontColor?: '#2c2c2c' | 'lightgray' | 'white';
-    bgColor?: '#2c2c2c' | 'lightgray' | 'white';
-    accent?: '#0095f6';
-    borderColor?: 'rgb(219, 219, 219)';
+    fontColor?: string;
+    bgColor?: string;
+    accent?: string;
+    borderColor?: string;
   }
 }

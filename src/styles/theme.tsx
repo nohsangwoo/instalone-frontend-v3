@@ -3,12 +3,14 @@ import { DefaultTheme } from 'styled-components';
 
 const lightTheme: DefaultTheme = {
   accent: '#0095f6',
+  bgColor: '#FAFAFA',
+  fontColor: 'rgb(38, 38, 38)',
   borderColor: 'rgb(219, 219, 219)',
 };
 
 const darkTheme: DefaultTheme = {
   fontColor: 'white',
-  bgColor: '#2c2c2c',
+  bgColor: '#000',
 };
 
 export { lightTheme, darkTheme };

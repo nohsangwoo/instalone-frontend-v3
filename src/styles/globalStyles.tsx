@@ -11,12 +11,15 @@ export const GlobalStyles = createGlobalStyle`
       box-sizing:border-box;
     }
     body {
-      background-color: #FAFAFA;
+      background-color:${props => props.theme.bgColor};
         font-size:14px;
         font-family:'Open Sans', sans-serif;
-        color:rgb(38, 38, 38);
+        color:${props => props.theme.fontColor};
     }
     a {
       text-decoration: none;
+    }
+    input{
+      color:#000;
     }
 `;

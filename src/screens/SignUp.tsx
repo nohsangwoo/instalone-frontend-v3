@@ -67,9 +67,10 @@ function SingUp(): JSX.Element {
     const { username, password } = getValues();
 
     const {
-      createAccount: { ok, error },
+      // createAccount: { ok, error },
+      createAccount: { ok },
     } = data;
-    console.log(error);
+    // console.log(error);
     if (!ok) {
       return;
     }
@@ -90,7 +91,7 @@ function SingUp(): JSX.Element {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
     getValues,
   } = useForm({
     mode: 'onChange',

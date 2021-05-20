@@ -142,3 +142,11 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 
 - onChange 사용시 react hooks form 이 깨져버리는? 상태 발생
 - setError 사용법 연구 필요
+
+# 10.13 Redirecting Users
+
+- useHistory를 이용하여 변수와 함께 push 하고 useLocation이용하여 변수와 함께 props를 받아옴
+
+# 10.14 Dark Mode
+
+- darkmode세팅

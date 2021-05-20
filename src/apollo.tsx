@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache, makeVar } from '@apollo/client';
 
 // token constance
-const TOKEN = 'token';
+const TOKEN = 'TOKEN';
+const DARK_MODE = 'DARK_MODE';
 
 // isLoggedInVar이란 이름의 reactive variable을 생성하는데
 // 초기값은 localStorage에 저장된 token이 존재하면 true 존재하지 않으면 false로 지정
@@ -22,7 +23,22 @@ export const logUserOut = () => {
 };
 
 // darkMode의 상태를 위한 reactive variable
-export const darkModeVar = makeVar(false);
+// darkmode설정이 localstorage에 존재하면 true 아니라면 false로 초기화
+export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
+
+// localStorage에 DARK_MODE라는 키값에 enabled 값 저장
+export const enableDarkMode = () => {
+  localStorage.setItem(DARK_MODE, 'enabled');
+  darkModeVar(true);
+};
+
+// localStorage에 DARK_MODE라는 키값삭제 후 reactive variable인 darkModeVar의 값을 false로 지정
+export const disableDarkMode = () => {
+  localStorage.removeItem(DARK_MODE);
+  darkModeVar(false);
+};
+
+// ------ end of darkmode settings
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
