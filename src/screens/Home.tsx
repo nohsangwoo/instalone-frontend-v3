@@ -49,7 +49,7 @@ const Username = styled(FatText)`
 `;
 
 const PhotoFile = styled.img`
-  min-width: 100%;
+  width: 100%;
 `;
 
 const PhotoData = styled.div`
