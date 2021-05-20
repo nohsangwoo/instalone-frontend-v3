@@ -159,3 +159,7 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
 # 11.1 Header part Two
 
 - header 부분 아이콘 추가 및 마무리
+
+# 11.2 Header part Three
+
+- localStorage에 저장된 token을 꺼내다 우리의 http의 header에 넣어서 사용하기위해서 설정
