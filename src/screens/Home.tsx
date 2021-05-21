@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 
 import Photo from '../components/feed/Photo';
+import PageTitle from '../components/PageTitle';
 
 // 나를 follow하는 모든 user의 feed와 && 나의 feed를 전부 로드하여 불러온다
 // 위 내용의 트리거
@@ -44,6 +45,7 @@ function Home(): JSX.Element {
   };
   return (
     <div>
+      <PageTitle title="Home" />
       {data?.seeFeed?.map((photo: returnValue) => (
         <Photo key={photo.id} {...photo} />
       ))}

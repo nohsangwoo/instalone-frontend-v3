@@ -17,5 +17,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "exclude": ["src/__generated__/globalTypes.ts"]
+  // "exclude": ["src/__generated__/globalTypes.ts"]
 }
