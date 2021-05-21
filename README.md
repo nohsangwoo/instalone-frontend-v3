@@ -192,3 +192,93 @@ const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
 
 - mutation이 완료된 이후 refetchQueries를 실행하여 말그대로 해당쿼리내용을 다시 fetch하는 것
 - 해당 쿼리를 완전히 다시 실행하는것과 동일한 작업이기때문에 좋은 방법은 아님 (귀찮을때 사용)
+
+# 11.9 writeFragment
+
+- mutation이후 행동하는 작업중 update를 이용하여 cache를 update해준다
+- update는 백엔드에서 받은 데이터를 주는 function이고
+- components/feed/photo.tsx에서 예시
+- cache 덮어씌우는 방법 학습
+- 사용예시
+
+```
+function Photo({ id, user, file, isLiked, likes }: Props) {
+  useEffect(() => {}, [user.username]);
+  // cache: InMemoryCache 부분이랑 ,
+  //   Backend에서 받아온 Result부분
+  const updateToggleLike = (cache: any, result: any) => {
+    console.log(cache, result);
+    const {
+      data: {
+        toggleLike: { ok },
+      },
+    } = result;
+    // Mutation이 성공적으로 작동하여 제대로 데이터를 받아왔다면
+    if (ok) {
+      cache.writeFragment({
+        //   덮어 씌울 대상의 ID가 필요함
+        // id확인은 apollo dev tools에서 확인가능
+        // useQuery로 이미 cache에 저장된 내용중
+        // 덮어씌울 대상의 type(mutation의 반환 type)과 덮어씌울 대상의 id
+        // (내가 덮어씌우길 원하는 대상을 id로 구분 (where과 비슷한느낌))
+        // 찾은 조건에서 덮어씌울 조건의 상용구로 사용
+        id: `Photo:${id}`,
+        // 위 단계에서 덮어씌울 대상을 정밀하게 찾아냈다면
+        // fragment에선 어디에 덮어씌울건지 대상을 찾음
+        // photo의 어떤 feild에 덮어씌울지?
+        fragment: gql`
+          # 패턴을 외우셈 : fragment 아무이름 on Photo{...}
+          # 아무 이름 부분은 정말 의미 없이 아무이름을 적으면됨
+          #   여기선 photo의 isLiked부분을 덮어씌우겠다고 하는 의미
+          fragment BSName on Photo {
+            isLiked
+          }
+        `,
+        // 이제 어떤 데이터를 덮어씌울것인지 찾음
+        // 덮의 씌울 대상은 위에서 찾은 isLiked이고
+        // 덮어씌울 값은 useQeury를 이용하여 seeFeed를 실행한 반환값중
+        // 최신화된 isLiked의 반전값으로 덮어씌우겠다는거임
+        // 내용에 따라 어떤값을 덮어씌우든 마음대로
+        // 이 경우 기능은 isLiked가 토글되는 개념이기에 이렇게 구현
+        data: {
+          isLiked: !isLiked,
+        },
+      });
+      //   cache.writeFragment({
+      //     id: `User:${1}`,
+      //     fragment: gql`
+      //       fragment BSName on User {
+      //         username
+      //       }
+      //     `,
+      //     data: {
+      //       username: 'nohsangwoo',
+      //     },
+      //   });
+    }
+  };
+  const [toggleLikeMutation, { loading }] = useMutation<
+    //   트리거에서 전달 받는 인자
+    { toggleLike: { id: number } },
+    // hooks에서(여기서) 전달 하는 인자
+    { id: number }
+  >(TOGGLE_LIKE_MUTATION, {
+    variables: {
+      id,
+    },
+
+    update: updateToggleLike,
+  });
+
+  console.log('loading', loading);
+
+  const tpggleLikeFunc = () => {
+    toggleLikeMutation();
+  };
+
+```
+
+# 11.10 readFragment
+
+- cache update에서 업데이트하고 싶은(덮어씌울 데이터가 없을때 불러오는 방법)
+- update시 cache에 저장된 데이터를 불러오는 방법
