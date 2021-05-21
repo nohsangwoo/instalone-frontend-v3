@@ -16,7 +16,17 @@ const FEED_QUERY = gql`
       file
       caption
       likes
-      comments
+      commentNumber
+      comments {
+        id
+        user {
+          username
+          avatar
+        }
+        payload
+        isMine
+        createdAt
+      }
       createdAt
       isMine
       isLiked
@@ -38,7 +48,17 @@ function Home(): JSX.Element {
     file: string;
     caption: string;
     likes: number;
-    comments?: string;
+    commentNumber?: number;
+    comments: {
+      id: number;
+      user: {
+        username: string;
+        avatar: string;
+      };
+      payload: string;
+      isMine: boolean;
+      createdAt: string;
+    }[];
     createdAt: string;
     isMine: boolean;
     isLiked: boolean;

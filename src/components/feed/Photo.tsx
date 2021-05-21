@@ -72,6 +72,22 @@ const Likes = styled(FatText)`
   display: block;
 `;
 
+const Comments = styled.div`
+  margin-top: 20px;
+`;
+const Comment = styled.div``;
+const CommentCaption = styled.span`
+  margin-left: 10px;
+`;
+
+const CommentCount = styled.span`
+  opacity: 0.7;
+  margin: 10px 0px;
+  display: block;
+  font-weight: 600;
+  font-size: 10px;
+`;
+
 type Props = {
   id: number;
   user: {
@@ -81,13 +97,31 @@ type Props = {
   file: string;
   caption: string;
   likes: number;
-  comments?: string;
+  commentNumber?: number;
+  comments: {
+    id: number;
+    user: {
+      username: string;
+      avatar: string;
+    };
+    payload: string;
+    isMine: boolean;
+    createdAt: string;
+  }[];
   createdAt: string;
   isMine: boolean;
   isLiked: boolean;
 };
 
-function Photo({ id, user, file, isLiked, likes, caption }: Props) {
+function Photo({
+  id,
+  user,
+  file,
+  isLiked,
+  likes,
+  caption,
+  commentNumber,
+}: Props) {
   useEffect(() => {}, [user.username]);
   // cache: InMemoryCache 부분이랑 ,
   //   Backend에서 받아온 Result부분
@@ -177,12 +211,16 @@ function Photo({ id, user, file, isLiked, likes, caption }: Props) {
           </div>
         </PhotoActions>
         <Likes>{likes === 1 ? '1 like' : `${likes} likes`}</Likes>
-        <div>
-          <div>
-            <span>{user.username}</span>
-            <span>{caption}</span>
-          </div>
-        </div>
+        <Comments>
+          <Comment>
+            <FatText>{user.username}</FatText>
+            <CommentCaption>{caption}</CommentCaption>
+          </Comment>
+          <div>commentNuimber: {commentNumber}</div>
+          <CommentCount>
+            {commentNumber === 1 ? '1 comment' : `${commentNumber} comments`}
+          </CommentCount>
+        </Comments>
       </PhotoData>
     </PhotoContainer>
   );
