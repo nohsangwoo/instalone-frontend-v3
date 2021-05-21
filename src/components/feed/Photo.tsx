@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import Avatar from '../Avatar';
 import { FatText } from '../shared';
 import { useEffect } from 'react';
+import Comments from './Comments';
 
 const TOGGLE_LIKE_MUTATION = gql`
   mutation toggleLike($id: Int!) {
@@ -72,21 +73,21 @@ const Likes = styled(FatText)`
   display: block;
 `;
 
-const Comments = styled.div`
-  margin-top: 20px;
-`;
-const Comment = styled.div``;
-const CommentCaption = styled.span`
-  margin-left: 10px;
-`;
+// const Comments = styled.div`
+//   margin-top: 20px;
+// `;
+// const Comment = styled.div``;
+// const CommentCaption = styled.span`
+//   margin-left: 10px;
+// `;
 
-const CommentCount = styled.span`
-  opacity: 0.7;
-  margin: 10px 0px;
-  display: block;
-  font-weight: 600;
-  font-size: 10px;
-`;
+// const CommentCount = styled.span`
+//   opacity: 0.7;
+//   margin: 10px 0px;
+//   display: block;
+//   font-weight: 600;
+//   font-size: 10px;
+// `;
 
 type Props = {
   id: number;
@@ -121,6 +122,7 @@ function Photo({
   likes,
   caption,
   commentNumber,
+  comments,
 }: Props) {
   useEffect(() => {}, [user.username]);
   // cache: InMemoryCache 부분이랑 ,
@@ -211,16 +213,12 @@ function Photo({
           </div>
         </PhotoActions>
         <Likes>{likes === 1 ? '1 like' : `${likes} likes`}</Likes>
-        <Comments>
-          <Comment>
-            <FatText>{user.username}</FatText>
-            <CommentCaption>{caption}</CommentCaption>
-          </Comment>
-          <div>commentNuimber: {commentNumber}</div>
-          <CommentCount>
-            {commentNumber === 1 ? '1 comment' : `${commentNumber} comments`}
-          </CommentCount>
-        </Comments>
+        <Comments
+          author={user.username}
+          caption={caption}
+          commentNumber={commentNumber}
+          comments={comments}
+        />
       </PhotoData>
     </PhotoContainer>
   );
