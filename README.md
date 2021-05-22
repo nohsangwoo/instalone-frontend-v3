@@ -282,3 +282,37 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
 
 - cache update에서 업데이트하고 싶은(덮어씌울 데이터가 없을때 불러오는 방법)
 - update시 cache에 저장된 데이터를 불러오는 방법
+
+# 11.13 Parsing Hashtags
+
+- replace witch regex
+- sanitize-html (html문법 보호를 해제)
+  https://www.npmjs.com/package/sanitize-html 참고
+  사용법 학습(허용하고자하는 html tag를 관리할수 있음 허용되지 않은 tag는 string으로 표현된다)
+
+  - dangerouslySetInnerHTML
+
+  ```
+  function Comment({ author, payload }: Props) {
+  const cleanedPayload = sanitizeHtml(
+    payload.replace(/#[\w]+/g, '<mark>$&</mark>'),
+    {
+      allowedTags: ['mark'],
+    }
+  );
+  return (
+    <CommentContainer>
+      <FatText>{author}</FatText>
+      <CommentCaption
+        dangerouslySetInnerHTML={{
+          __html: cleanedPayload,
+        }}
+      />
+    </CommentContainer>
+  );
+  }
+
+  ```
+
+  모든 태그에는 html을 허용하는 태그가 존재함 but 매우 위험한 작업이어서 기본적으로 모든 태그를 하드코딩이 아닌 상태로 입력받은경우는 string으로 표현하게 됨
+  이 작업을 풀어주는 게 dangerouslySetInnerHTML 설정
