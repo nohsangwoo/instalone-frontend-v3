@@ -294,6 +294,9 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
 
   ```
   function Comment({ author, payload }: Props) {
+  // allowedTags로 허용한 tag만 기능으로 인식하게 만들어줌
+  //   (여기선 mark태그만 허용한것 )
+  // 그외 tag는 string으로 표현됨(사용자의 공격으로부터 보호함)
   const cleanedPayload = sanitizeHtml(
     payload.replace(/#[\w]+/g, '<mark>$&</mark>'),
     {
@@ -316,3 +319,7 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
 
   모든 태그에는 html을 허용하는 태그가 존재함 but 매우 위험한 작업이어서 기본적으로 모든 태그를 하드코딩이 아닌 상태로 입력받은경우는 string으로 표현하게 됨
   이 작업을 풀어주는 게 dangerouslySetInnerHTML 설정
+
+# 11.14 Parsing Hashtags part Two
+
+- html 허용하는 방식 변경

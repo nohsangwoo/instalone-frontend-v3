@@ -1,6 +1,7 @@
-import sanitizeHtml from 'sanitize-html';
+import React from 'react';
 import styled from 'styled-components';
 import { FatText } from '../shared';
+import { Link } from 'react-router-dom';
 
 const CommentContainer = styled.div``;
 const CommentCaption = styled.span<{
@@ -9,7 +10,7 @@ const CommentCaption = styled.span<{
   };
 }>`
   margin-left: 10px;
-  mark {
+  a {
     background-color: inherit;
     color: ${props => props.theme.accent};
     cursor: pointer;
@@ -25,23 +26,20 @@ type Props = {
 };
 
 function Comment({ author, payload }: Props) {
-  // allowedTags로 허용한 tag만 기능으로 인식하게 만들어줌
-  //   (여기선 mark태그만 허용한것 )
-  // 그외 tag는 string으로 표현됨(사용자의 공격으로부터 보호함)
-  const cleanedPayload = sanitizeHtml(
-    payload.replace(/#[\w]+/g, '<mark>$&</mark>'),
-    {
-      allowedTags: ['mark'],
-    }
-  );
   return (
     <CommentContainer>
       <FatText>{author}</FatText>
-      <CommentCaption
-        dangerouslySetInnerHTML={{
-          __html: cleanedPayload,
-        }}
-      />
+      <CommentCaption>
+        {payload.split(' ').map((word, index) =>
+          /#[\w]+/.test(word) ? (
+            <React.Fragment key={index}>
+              <Link to={`/hashtags/${word}`}>{word}</Link>
+            </React.Fragment>
+          ) : (
+            <React.Fragment key={index}>{word} </React.Fragment>
+          )
+        )}
+      </CommentCaption>
     </CommentContainer>
   );
 }
