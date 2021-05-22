@@ -282,6 +282,118 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
 
 - cache update에서 업데이트하고 싶은(덮어씌울 데이터가 없을때 불러오는 방법)
 - update시 cache에 저장된 데이터를 불러오는 방법
+- 사용법
+
+```
+function Photo({
+  id,
+  user,
+  file,
+  isLiked,
+  likes,
+  caption,
+  commentNumber,
+  comments,
+}: Props) {
+  useEffect(() => {}, [user.username]);
+  // cache: InMemoryCache 부분이랑 ,
+  //   Backend에서 받아온 Result부분
+  const updateToggleLike = (cache: any, result: any) => {
+    console.log(cache, result);
+    const {
+      data: {
+        toggleLike: { ok },
+      },
+    } = result;
+    // Mutation이 성공적으로 작동하여 제대로 데이터를 받아왔다면
+    if (ok) {
+      // cache에 저장된 어떤 데이터를 가져오고 싶을때(말그대로 readFragment)
+      const fragmentId = `Photo:${id}`;
+      const fragment = gql`
+        fragment BSName on Photo {
+          isLiked
+          likes
+        }
+      `;
+      //   위 정보를 취합하여 실제로 cache에서 데이터를 불러와 result에 담아준다
+      const result = cache.readFragment({
+        id: fragmentId,
+        fragment,
+      });
+
+      // result안에 해당 인자가 존재한다면(안전장치)
+      if ('isLiked' in result && 'likes' in result) {
+        //   isLike와 likes에 각각 별명을 붙여주고
+        const { isLiked: cacheIsLiked, likes: cacheLikes } = result;
+        // writeFragment를 진행하면서 불러온 데이터로 덮어씌워준다
+        cache.writeFragment({
+          id: fragmentId,
+          fragment,
+          data: {
+            isLiked: !cacheIsLiked,
+            likes: cacheIsLiked ? cacheLikes - 1 : cacheLikes + 1,
+          },
+        });
+      }
+    }
+  };
+  const [toggleLikeMutation, { loading }] = useMutation<
+    //   트리거에서 전달 받는 인자
+    { toggleLike: { id: number } },
+    // hooks에서(여기서) 전달 하는 인자
+    { id: number }
+  >(TOGGLE_LIKE_MUTATION, {
+    variables: {
+      id,
+    },
+
+    update: updateToggleLike,
+  });
+
+  console.log('loading', loading);
+
+  const tpggleLikeFunc = () => {
+    toggleLikeMutation();
+  };
+
+  return (
+    <PhotoContainer key={id}>
+      <PhotoHeader>
+        <Avatar lg url={user.avatar} />
+        <Username>{user.username}</Username>
+      </PhotoHeader>
+      <PhotoFile src={file} />
+      <PhotoData>
+        <PhotoActions>
+          <div>
+            <PhotoAction onClick={tpggleLikeFunc}>
+              <FontAwesomeIcon
+                style={{ color: isLiked ? 'tomato' : 'inherit' }}
+                icon={isLiked ? SolidHeart : faHeart}
+              />
+            </PhotoAction>
+            <PhotoAction>
+              <FontAwesomeIcon icon={faComment} />
+            </PhotoAction>
+            <PhotoAction>
+              <FontAwesomeIcon icon={faPaperPlane} />
+            </PhotoAction>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faBookmark} />
+          </div>
+        </PhotoActions>
+        <Likes>{likes === 1 ? '1 like' : `${likes} likes`}</Likes>
+        <Comments
+          author={user.username}
+          caption={caption}
+          commentNumber={commentNumber}
+          comments={comments}
+        />
+      </PhotoData>
+    </PhotoContainer>
+
+```
 
 # 11.13 Parsing Hashtags
 
@@ -323,3 +435,8 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
 # 11.14 Parsing Hashtags part Two
 
 - html 허용하는 방식 변경
+
+# 11.15 cache Modify
+
+- apollo v3에서 새로 생긴기능임
+- 사용법이 간단하고 변경하려는 cache값의 이전값을 이용하여 간단하게 변경하는 경우 아주 간단하고 유용하게 사용할 수 있음

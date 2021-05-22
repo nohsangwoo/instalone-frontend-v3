@@ -128,7 +128,7 @@ function Photo({
   // cache: InMemoryCache 부분이랑 ,
   //   Backend에서 받아온 Result부분
   const updateToggleLike = (cache: any, result: any) => {
-    console.log(cache, result);
+    // console.log(cache, result);
     const {
       data: {
         toggleLike: { ok },
@@ -136,34 +136,21 @@ function Photo({
     } = result;
     // Mutation이 성공적으로 작동하여 제대로 데이터를 받아왔다면
     if (ok) {
-      // cache에 저장된 어떤 데이터를 가져오고 싶을때(말그대로 readFragment)
-      const fragmentId = `Photo:${id}`;
-      const fragment = gql`
-        fragment BSName on Photo {
-          isLiked
-          likes
-        }
-      `;
-      //   위 정보를 취합하여 실제로 cache에서 데이터를 불러와 result에 담아준다
-      const result = cache.readFragment({
-        id: fragmentId,
-        fragment,
-      });
-
-      // result안에 해당 인자가 존재한다면(안전장치)
-      if ('isLiked' in result && 'likes' in result) {
-        //   isLike와 likes에 각각 별명을 붙여주고
-        const { isLiked: cacheIsLiked, likes: cacheLikes } = result;
-        // writeFragment를 진행하면서 불러온 데이터로 덮어씌워준다
-        cache.writeFragment({
-          id: fragmentId,
-          fragment,
-          data: {
-            isLiked: !cacheIsLiked,
-            likes: cacheIsLiked ? cacheLikes - 1 : cacheLikes + 1,
+      const photoId = `Photo:${id}`;
+      cache.modify({
+        id: photoId,
+        fields: {
+          isLiked(prev: boolean) {
+            return !prev;
           },
-        });
-      }
+          likes(prev: number) {
+            if (isLiked) {
+              return prev - 1;
+            }
+            return prev + 1;
+          },
+        },
+      });
     }
   };
   const [toggleLikeMutation, { loading }] = useMutation<
