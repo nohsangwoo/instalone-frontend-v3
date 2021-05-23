@@ -540,3 +540,11 @@ function Photo({
   );
 }
 ```
+
+# 11.16 Create Comment part One
+
+- feed에 댓글다는 기능
+
+# 11.17 Create Comment part Two
+
+- setValue('payload','');
