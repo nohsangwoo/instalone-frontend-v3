@@ -24,7 +24,7 @@ const SSeparator = styled.div<{
   }
 `;
 
-function Separator() {
+function Separator(): JSX.Element {
   return (
     <SSeparator>
       <div></div>

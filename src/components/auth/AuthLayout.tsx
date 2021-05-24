@@ -30,7 +30,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function AuthLayout({ children }: Props) {
+function AuthLayout({ children }: Props): JSX.Element {
   const darkMode = useReactiveVar(darkModeVar);
   return (
     <Container>

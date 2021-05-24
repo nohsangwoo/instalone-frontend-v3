@@ -557,3 +557,7 @@ function Photo({
 ```
 cache.evict({ id: `Comment:${id}` });
 ```
+
+# 12.0 useParams
+
+- react-router-dom을 이용하여 전달받은 params를 쉽게 이용하는 방법

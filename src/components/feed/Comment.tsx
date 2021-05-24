@@ -42,7 +42,7 @@ type Props = {
   payload: string;
 };
 
-function Comment({ id, photoId, isMine, author, payload }: Props) {
+function Comment({ id, photoId, isMine, author, payload }: Props): JSX.Element {
   const updateDeleteComment = (cache: any, result: any) => {
     // deleteComment이후 반환 받은 return 값
     const {
@@ -80,7 +80,9 @@ function Comment({ id, photoId, isMine, author, payload }: Props) {
   };
   return (
     <CommentContainer>
-      <FatText>{author}</FatText>
+      <Link to={`/users/${author}`}>
+        <FatText>{author}</FatText>
+      </Link>
       <CommentCaption>
         {payload.split(' ').map((word, index) =>
           // 해당 정규표현 식이   맞는지 테스트후 true or false 로 반환한다.

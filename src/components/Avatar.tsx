@@ -12,7 +12,7 @@ const Img = styled.img`
   max-width: 100%;
 `;
 
-function Avatar({ url = '', lg = false }) {
+function Avatar({ url = '', lg = false }): JSX.Element {
   return <SAvatar lg={lg}>{url !== '' ? <Img src={url} /> : null}</SAvatar>;
 }
 export default Avatar;

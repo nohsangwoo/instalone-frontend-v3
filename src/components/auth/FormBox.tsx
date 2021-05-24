@@ -21,7 +21,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function FormBox({ children }: Props) {
+function FormBox({ children }: Props): JSX.Element {
   return <Container>{children}</Container>;
 }
 export default FormBox;

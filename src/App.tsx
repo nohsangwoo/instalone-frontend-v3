@@ -10,8 +10,10 @@ import { lightTheme, darkTheme } from './styles/theme';
 import SignUp from './screens/SignUp';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from './components/Layout';
+import Profile from './screens/Profile';
+
 // 여기 styled theme - typescript 적용
-function App() {
+function App(): JSX.Element {
   // isLoggedInVar는 apollo.tsx파일에서 makeVar를 이용하여 선언됐지만
   // 이것을 react components전체에서 사용하고싶다면 이런식으로 hook설정을 해주면됨
   // 이제 하위 컴포넌트 어디서든 isLoggedInVar(true)이런 형식으로 사용 가능
@@ -39,6 +41,9 @@ function App() {
                   <SignUp />
                 </Route>
               ) : null}
+              <Route path={`/users/:username`}>
+                <Profile />
+              </Route>
               <Route>
                 <NotFound />
               </Route>

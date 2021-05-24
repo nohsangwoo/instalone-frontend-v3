@@ -63,7 +63,7 @@ function Comments({
   caption,
   commentNumber,
   comments,
-}: Props) {
+}: Props): JSX.Element {
   // 로그인에 성공한 상태인지 확인하는 작업
   const { data: userData } = useUser();
   const { register, handleSubmit, setValue, getValues } = useForm();

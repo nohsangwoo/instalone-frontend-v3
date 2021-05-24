@@ -12,7 +12,17 @@ const ME_QUERY = gql`
   }
 `;
 
-function useUser() {
+type returnValue = {
+  data: {
+    me: {
+      id: number;
+      username: string;
+      avatar: string;
+    };
+  };
+};
+
+function useUser(): returnValue {
   const hasToken = useReactiveVar(isLoggedInVar);
   // user가 로그인에 성공하지 못해서 token을 가지고 있지 않다면
   // me query를 건너 뛰게 설정해줌

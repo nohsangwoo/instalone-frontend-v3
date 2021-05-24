@@ -18,6 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     }
     a {
       text-decoration: none;
+      color:inherit;
     }
     input{
       color:#000;
