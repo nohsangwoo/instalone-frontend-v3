@@ -98,6 +98,23 @@ function Comments({
         },
       };
 
+      const newCacheComment = cache.writeFragment({
+        data: newComment,
+        fragment: gql`
+          fragment BSName on Comment {
+            # 덮어씌울 대상(필드)를 세팅
+            id
+            createdAt
+            isMine
+            payload
+            user {
+              username
+              avatar
+            }
+          }
+        `,
+      });
+
       //  cache값을 수정(update)하기 위한 기능
       cache.modify({
         // 덮어씌우려는 대상(target)을 지정
@@ -106,7 +123,7 @@ function Comments({
           // 지정된 target안에서의 상세한 내용
           comments(prev: any) {
             //   cache에 저장된 기존값을 배열안에 spread해주고 덮어씌워줄 내용인 newCommnet를 덮어씌운다
-            return [...prev, newComment];
+            return [...prev, newCacheComment];
           },
           commentNumber(prev: number) {
             // cache에 저장된 commentNumber의 기존값에 +1 하여 덮어씌운다
