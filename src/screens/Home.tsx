@@ -1,37 +1,28 @@
 import { gql, useQuery } from '@apollo/client';
-
 import Photo from '../components/feed/Photo';
 import PageTitle from '../components/PageTitle';
+import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from '../fragments';
 
 // 나를 follow하는 모든 user의 feed와 && 나의 feed를 전부 로드하여 불러온다
 // 위 내용의 트리거
 const FEED_QUERY = gql`
   query seeFeed {
     seeFeed {
-      id
+      ...PhotoFragment
       user {
         username
         avatar
       }
-      file
       caption
-      likes
-      commentNumber
       comments {
-        id
-        user {
-          username
-          avatar
-        }
-        payload
-        isMine
-        createdAt
+        ...CommentFragment
       }
       createdAt
       isMine
-      isLiked
     }
   }
+  ${PHOTO_FRAGMENT}
+  ${COMMENT_FRAGMENT}
 `;
 
 function Home(): JSX.Element {

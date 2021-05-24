@@ -561,3 +561,8 @@ cache.evict({ id: `Comment:${id}` });
 # 12.0 useParams
 
 - react-router-dom을 이용하여 전달받은 params를 쉽게 이용하는 방법
+
+# 12.1 Queries and Fragments
+
+- 자주 사용하는 쿼리를 모듈화 해서 재사용 하는 방법
+  src/fragment와 Profile안의 내용 참조
