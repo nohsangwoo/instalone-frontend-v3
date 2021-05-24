@@ -176,6 +176,9 @@ function Profile(): JSX.Element {
     if (!ok) {
       return;
     }
+
+    // cache에 접근하는 방법
+    // 이렇게 사용하면 어디서든 접근가능
     const { cache } = client;
     cache.modify({
       id: `User:${username}`,
