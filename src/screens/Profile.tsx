@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { gql, useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
@@ -131,24 +131,71 @@ const ProfileBtn = styled(Button).attrs({
 function Profile(): JSX.Element {
   const { username } = useParams<{ username: string }>();
   const { data: userData } = useUser();
+  const client = useApolloClient();
   const { data, loading } = useQuery(SEE_PROFILE_QUERY, {
     variables: {
       username,
     },
   });
 
-  // mutation hook생성
+  const unfollowUserUpdate = (cache: any, result: any) => {
+    const {
+      data: {
+        unfollowUser: { ok },
+      },
+    } = result;
+    if (!ok) {
+      return;
+    }
+    cache.modify({
+      id: `User:${username}`,
+      fields: {
+        isFollowing(prev: boolean) {
+          return false;
+        },
+        totalFollowers(prev: number) {
+          return prev - 1;
+        },
+      },
+    });
+  };
+
+  // unfollowUser mutation hook생성
   const [unfollowUser] = useMutation(UNFOLLOW_USER_MUTATION, {
     variables: {
       username,
     },
+    update: unfollowUserUpdate,
   });
+
+  const followUserCompleted = (data: any) => {
+    // onComplete는 mutation이 완료후 반환한 data만 반환한다.
+    const {
+      followUser: { ok },
+    } = data;
+    if (!ok) {
+      return;
+    }
+    const { cache } = client;
+    cache.modify({
+      id: `User:${username}`,
+      fields: {
+        isFollowing(prev: boolean) {
+          return true;
+        },
+        totalFollowers(prev: number) {
+          return prev + 1;
+        },
+      },
+    });
+  };
 
   // mutation hook생성
   const [followUser] = useMutation(FOLLOW_USER_MUTATION, {
     variables: {
       username,
     },
+    onCompleted: followUserCompleted,
   });
 
   const getButton = (seeProfile: {
