@@ -157,6 +157,7 @@ function Comments({
   };
   return (
     <CommentsContainer>
+      {/* feed주인의 comment */}
       <Comment author={author} payload={caption} />
       <CommentCount>
         {commentNumber === 1 ? '1 comment' : `${commentNumber} comments`}
@@ -164,8 +165,11 @@ function Comments({
       {comments?.map(comment => (
         <Comment
           key={comment.id}
+          id={comment.id}
+          photoId={photoId}
           author={comment.user.username}
           payload={comment.payload}
+          isMine={comment.isMine}
         />
       ))}
       <PostCommentContainer>

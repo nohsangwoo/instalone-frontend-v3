@@ -1,7 +1,16 @@
+import { gql, useMutation } from '@apollo/client';
 import React from 'react';
 import styled from 'styled-components';
 import { FatText } from '../shared';
 import { Link } from 'react-router-dom';
+
+const DELETE_COMMENT_MUTATION = gql`
+  mutation deleteComment($id: Int!) {
+    deleteComment(id: $id) {
+      ok
+    }
+  }
+`;
 
 const CommentContainer = styled.div`
   margin-bottom: 7px;
@@ -24,11 +33,44 @@ const CommentCaption = styled.span<{
 `;
 
 type Props = {
+  id?: number;
+  photoId?: number;
+  isMine?: boolean;
   author: string;
   payload: string;
 };
 
-function Comment({ author, payload }: Props) {
+function Comment({ id, photoId, isMine, author, payload }: Props) {
+  const updateDeleteComment = (cache: any, result: any) => {
+    // deleteComment이후 반환 받은 return 값
+    const {
+      data: {
+        deleteComment: { ok },
+      },
+    } = result;
+    if (ok) {
+      // cache에 있는 comment를 찾아서 내쫓다(지움)
+      cache.evict({ id: `Comment:${id}` });
+      // comment를 cache에서 지운다음 photo의 commentNumber에서 1을 빼준값을 덮어씌움
+      cache.modify({
+        id: `Photo:${photoId}`,
+        fields: {
+          commentNumber(prev: number) {
+            return prev - 1;
+          },
+        },
+      });
+    }
+  };
+  const [deleteCommentMutation] = useMutation(DELETE_COMMENT_MUTATION, {
+    variables: {
+      id,
+    },
+    update: updateDeleteComment,
+  });
+  const onDeleteClick = () => {
+    deleteCommentMutation();
+  };
   return (
     <CommentContainer>
       <FatText>{author}</FatText>
@@ -47,6 +89,7 @@ function Comment({ author, payload }: Props) {
           )
         )}
       </CommentCaption>
+      {isMine ? <button onClick={onDeleteClick}>❌</button> : null}
     </CommentContainer>
   );
 }
