@@ -566,3 +566,11 @@ cache.evict({ id: `Comment:${id}` });
 
 - 자주 사용하는 쿼리를 모듈화 해서 재사용 하는 방법
   src/fragment와 Profile안의 내용 참조
+
+# 12.2 keyFields
+
+- 보통은 id를 query로 불러오면 이것을 apollo가 자동으로 인식하여 고유식별자로 인식하고
+  cache에 하나의 객체로 저장해주는데
+- 때론 어떤이유로 id를 불러오지 않는경우에는 ROOT_QUERY에 다 때려박아버린다.
+- 그래서 일련의 규칙으로 고유식별자를 따로 지정해주고 그것을 기준으로 cache에
+  따로 나뉘어진 새로운 객체로 저장하게 만들어 주기위해 apollo.tsx에서 InMemoryCache의 typePolicies설정을해준다
