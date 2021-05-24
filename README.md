@@ -582,3 +582,8 @@ cache.evict({ id: `Comment:${id}` });
 - cache update 시 onComplete방식으로 업데이트 하는 방법 (profile.tsx)
 
 # 12.4 Follow Unfollow part Two
+
+# 12.7 Follow Unfollow part Two
+
+- 내가 follow 한 상대의 cache에서 follower부분을 변경했다면
+- 나의 following의 cache부분도 변경해주는것

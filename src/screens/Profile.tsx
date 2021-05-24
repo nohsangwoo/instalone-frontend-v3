@@ -158,6 +158,17 @@ function Profile(): JSX.Element {
         },
       },
     });
+    const { me } = userData;
+    // 내가 follow 한 상대의 cache에서 follower부분을 변경했다면
+    // 나의 following의 cache부분도 변경해주는것
+    cache.modify({
+      id: `User:${me.username}`,
+      fields: {
+        totalFollowing(prev: number) {
+          return prev - 1;
+        },
+      },
+    });
   };
 
   // unfollowUser mutation hook생성
@@ -187,6 +198,17 @@ function Profile(): JSX.Element {
           return true;
         },
         totalFollowers(prev: number) {
+          return prev + 1;
+        },
+      },
+    });
+    const { me } = userData;
+    // 내가 follow 한 상대의 cache에서 follower부분을 변경했다면
+    // 나의 following의 cache부분도 변경해주는것
+    cache.modify({
+      id: `User:${me.username}`,
+      fields: {
+        totalFollowing(prev: number) {
           return prev + 1;
         },
       },
