@@ -159,9 +159,11 @@ function Comments({
     <CommentsContainer>
       {/* feed주인의 comment */}
       <Comment author={author} payload={caption} />
+      {/* 나머지 comments 갯수 */}
       <CommentCount>
         {commentNumber === 1 ? '1 comment' : `${commentNumber} comments`}
       </CommentCount>
+      {/* commnets를 표현 */}
       {comments?.map(comment => (
         <Comment
           key={comment.id}

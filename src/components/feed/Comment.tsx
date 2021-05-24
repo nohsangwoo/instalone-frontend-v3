@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FatText } from '../shared';
 import { Link } from 'react-router-dom';
 
+// deleteCommen의 트리거 생성
 const DELETE_COMMENT_MUTATION = gql`
   mutation deleteComment($id: Int!) {
     deleteComment(id: $id) {
@@ -32,6 +33,7 @@ const CommentCaption = styled.span<{
   }
 `;
 
+// 전달받는 Props
 type Props = {
   id?: number;
   photoId?: number;
@@ -62,13 +64,18 @@ function Comment({ id, photoId, isMine, author, payload }: Props) {
       });
     }
   };
+
+  // useMutation hook 생성
   const [deleteCommentMutation] = useMutation(DELETE_COMMENT_MUTATION, {
     variables: {
       id,
     },
+    // mutation 작동 후 실행되는 부분
     update: updateDeleteComment,
   });
+
   const onDeleteClick = () => {
+    // useMutation hook 사용
     deleteCommentMutation();
   };
   return (

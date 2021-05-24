@@ -548,3 +548,12 @@ function Photo({
 # 11.17 Create Comment part Two
 
 - setValue('payload','');
+
+# 11.19 Delete Comment
+
+- cache에 존재하는 comment를 지우는 방법(use evict)
+  사용법
+
+```
+cache.evict({ id: `Comment:${id}` });
+```
