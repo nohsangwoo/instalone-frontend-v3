@@ -574,3 +574,7 @@ cache.evict({ id: `Comment:${id}` });
 - 때론 어떤이유로 id를 불러오지 않는경우에는 ROOT_QUERY에 다 때려박아버린다.
 - 그래서 일련의 규칙으로 고유식별자를 따로 지정해주고 그것을 기준으로 cache에
   따로 나뉘어진 새로운 객체로 저장하게 만들어 주기위해 apollo.tsx에서 InMemoryCache의 typePolicies설정을해준다
+
+# 12.4 Follow Unfollow part One
+
+# 12.4 Follow Unfollow part Two
