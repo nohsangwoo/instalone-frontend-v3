@@ -591,3 +591,14 @@ cache.evict({ id: `Comment:${id}` });
 # deploty
 
 공통룰은 NODE_ENV로 설정되는 변수값으로 배포되고있는데 NODE_ENV를 이용하여 백엔드 주소를 설정해준다
+
+# https://docs.netlify.com/routing/redirects/#app 처리해줘야함
+
+- redirection시 reactJS로 향하게
+-
+
+```
+_redirects플레인 txt파일을 public폴더에 추가
+<!-- 추가내용 어느 사람이 어디로 접속하더라도 일단 index.html로 보내고 status code 200을 준다-->
+/* /index.html 200
+```
