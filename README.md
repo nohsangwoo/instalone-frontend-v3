@@ -602,3 +602,8 @@ _redirects플레인 txt파일을 public폴더에 추가
 <!-- 추가내용 어느 사람이 어디로 접속하더라도 일단 index.html로 보내고 status code 200을 준다-->
 /* /index.html 200
 ```
+
+```
+<!-- 또다른 예시 /naver로 접속하면 네이버로 리다이렉션 시키기 그리고 스테이터스 코드200을 반환 ->
+/naver /https://www.naver.com 200
+```
