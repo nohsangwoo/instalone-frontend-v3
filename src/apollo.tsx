@@ -48,7 +48,10 @@ export const disableDarkMode = () => {
 
 // backend와 연결하기 위한 주소 세팅
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri:
+    process.env.NODE_ENV === 'production'
+      ? process.env.REACT_APP_PROD_URI
+      : 'http://localhost:4000/graphql',
 });
 
 // setContext함수는 클라이언트의 모든 Request에 몇가지 항목을 추가하는 일을 한다

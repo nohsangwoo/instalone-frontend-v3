@@ -7,7 +7,8 @@ import Button from '../components/auth/Button';
 import PageTitle from '../components/PageTitle';
 import { FatText } from '../components/shared';
 import { PHOTO_FRAGMENT } from '../fragments';
-import useUser, { ME_QUERY } from '../hooks/useUser';
+// import useUser, { ME_QUERY } from '../hooks/useUser';
+import useUser from '../hooks/useUser';
 
 const FOLLOW_USER_MUTATION = gql`
   mutation followUser($username: String!) {

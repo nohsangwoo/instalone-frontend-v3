@@ -587,3 +587,7 @@ cache.evict({ id: `Comment:${id}` });
 
 - 내가 follow 한 상대의 cache에서 follower부분을 변경했다면
 - 나의 following의 cache부분도 변경해주는것
+
+# deploty
+
+공통룰은 NODE_ENV로 설정되는 변수값으로 배포되고있는데 NODE_ENV를 이용하여 백엔드 주소를 설정해준다
