@@ -20,8 +20,6 @@
 | ✔ Follow / Unfollow | ✔ Commet on Photos |
 | ✔ Direct Messages   | ✔ Photo Feed       |
 |                     | ✔ Upload Photo     |
-|                     |                    |
-|                     |                    |
 
 
 |       App       | Deployment |
@@ -31,8 +29,6 @@
 | ✔ Permissions   |            |
 | ✔ Media Library |            |
 | ✔ Geolocation   |            |
-|                 |            |
-|                 |            |
 
 
 <br><br>
@@ -56,9 +52,10 @@
 <hr>
 <br><br>
 
-# 웹은 간단하게 구성하였다 이번 프로젝트의 고도화는 앱단으로 넘길예정
+## 웹은 간단하게 구성
+- 프로젝트의 고도화는 react native(app)에서 진행
 
-## 회원가입 기능
+# 회원가입
 
 <br><br>
 ![1-signup](./README_IMAGE/signup.gif)
@@ -66,6 +63,18 @@
 - 회원 가입 기능 구현
 - 회원가입 직후 바로 로그인 가능하게 로그인창으로 아이디와 비밀번호를 전달받는다
 - prisma studio로 등록된 회원 확인
+
+
+
+# 로그인
+
+<br><br>
+![2-login](./README_IMAGE/login.gif)
+
+- 로그인 기능 구현
+- 로그인후 백엔드로 부터 토큰을 받아 localstorage에 저장 및 reactive Variable을 이용하여 로그인 상태 제어
+- 로그인 후 초기 페이지는 Feed
+
 
 
 # Instaclone Web
