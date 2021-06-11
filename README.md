@@ -724,17 +724,6 @@ function Photo({
 
 
 
-# Parsing Hashtags part Two
-
-- html 허용하는 방식 변경
-
-
-<br><br>
-
-<hr>
-<br><br>
-
-
 
 # cache Modify
 
