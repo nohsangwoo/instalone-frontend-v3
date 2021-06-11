@@ -55,6 +55,13 @@
 ## 웹은 간단하게 구성
 - 프로젝트의 고도화는 react native(app)에서 진행
 
+
+<br><br>
+
+<hr>
+<br><br>
+
+
 # 회원가입
 
 <br><br>
@@ -87,13 +94,30 @@
 <br><br>
 
 
-# Write a comment(caching on apollo) 7 delete a comment
+# Write a comment(caching on apollo) & delete a comment
 
 <br><br>
 ![3-comment](./README_IMAGE/comment.gif)
 - comment추가 mutation 실행 후 추가된 comment를 리렌더링 하기위해 refetching 대신 cache를 직접 제어한다
 - cache를 제어하는 경우 DB와 백엔드 서버의 부하를 줄이고 불필요한 자원소모를 방지한다.
 - comment제거 mutation 또한 마찬가지 작업을 진행해준다
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+# Like
+
+
+<br><br>
+![4-like](./README_IMAGE/like.gif)
+- instagram의 좋아요 기능 구현 
+- DB와 백엔드 서버의 부하를 줄이고 불필요한 자원소모를 방지하기 위해 refetching 대신 apollo cache를 직접 제어한다
+- 리렌더링시 cache가 업데이트된 데이터를 기준으로 리렌더링 된다
+
 
 
 # Settings up
