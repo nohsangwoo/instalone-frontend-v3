@@ -66,7 +66,6 @@ function Home(): JSX.Element {
     isLiked: boolean;
   };
 
-  console.log('feed: ', data);
   return (
     <HomeContainer>
       <PageTitle title="Home" />

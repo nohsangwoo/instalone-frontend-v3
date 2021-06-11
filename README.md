@@ -1,3 +1,73 @@
+# Instagram Frontend
+
+- https://github.com/nohsangwoo/instaclone-backend-v3 와 연동됩니다(BackEnd)
+- deploy: https://insta-front-end-v3-noh.netlify.app/
+  (백엔드배포된 서비스의 상태가 무료버전이라 처음 접속시 sleep된상태에서 깨어나느라 조금 시간이 걸림(1~2분정도 기다려야함))
+
+# 설명에 첨부된 gif파일 크기로 인하여 readme파일을 불러오는데 시간이 좀더 소요될 수 있습니다. 많이 기다려주세요.
+
+<br><br>
+
+<hr>
+<br><br>
+
+# 구현 내용 및 컨셉
+
+|         user        |       Photos       |
+|:-------------------:|:------------------:|
+| ✔ Email Login       | ✔ Search Photo     |
+| ✔ User Profile      | ✔ Like Photo       |
+| ✔ Follow / Unfollow | ✔ Commet on Photos |
+| ✔ Direct Messages   | ✔ Photo Feed       |
+|                     | ✔ Upload Photo     |
+|                     |                    |
+|                     |                    |
+
+
+|       App       | Deployment |
+|:---------------:|:----------:|
+| ✔ Navigation    | ✔ Heroku   |
+| ✔ Camera        | ✔ Netlify  |
+| ✔ Permissions   |            |
+| ✔ Media Library |            |
+| ✔ Geolocation   |            |
+|                 |            |
+|                 |            |
+
+
+<br><br>
+<hr>
+<br><br>
+
+# 사용된 기술
+
+- ReactJS
+- typescript(for javascript)
+- apollo-graphql(for graphql)
+- websocket(for realtime subscription)
+- reactiveVariable
+- react-hook-form
+- styled-components
+- sanitize-html
+- prisma studio(DB제어및확인)
+
+<br><br>
+
+<hr>
+<br><br>
+
+# 웹은 간단하게 구성하였다 이번 프로젝트의 고도화는 앱단으로 넘길예정
+
+## 회원가입 기능
+
+<br><br>
+![1-signup](./README_IMAGE/signup.gif)
+
+- 회원 가입 기능 구현
+- 회원가입 직후 바로 로그인 가능하게 로그인창으로 아이디와 비밀번호를 전달받는다
+- prisma studio로 등록된 회원 확인
+
+
 # Instaclone Web
 
 # 8.1 Installing All
