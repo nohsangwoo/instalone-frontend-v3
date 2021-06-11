@@ -132,14 +132,27 @@
 ![5-profile](./README_IMAGE/profile.gif)
 - instagram의 profile 기능
 - 내 정보의 현황을 제공하는 페이지
-- followers, following, username, my all feeds
+- followers, following, username, my all feeds(축약 hover시 좋아요수 댓글수 표시)
 
 
 
+<br><br>
+
+<hr>
+<br><br>
 
 
-# Settings up
+# 이하 개발 내용 설명
+
+
+<br><br>
+
+<hr>
+<br><br>
 # Installing All
+```
+$npx create-react-app "프로젝트이름" —template typescript
+```
 
 - styled components
   https://styled-components.com/
@@ -162,48 +175,67 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
   npm install --save @fortawesome/react-fontawesome
   npm install --save @fortawesome/free-brands-svg-icons
   npm install --save @fortawesome/free-regular-svg-icons
-  ***
-  "@apollo/client": "^3.3.11",
-  "@fortawesome/fontawesome-svg-core": "^1.2.34",
-  "@fortawesome/free-brands-svg-icons": "^5.15.2",
-  "@fortawesome/free-regular-svg-icons": "^5.15.2",
-  "@fortawesome/free-solid-svg-icons": "^5.15.2",
-  "@fortawesome/react-fontawesome": "^0.1.14",
-  graphql": "^15.5.0",
-  "react-helmet-async": "^1.0.7",
-  "react-hook-form": "^6.15.1",
-  "react-router-dom": "^5.2.0",
-  "styled-components": "^5.2.1",
+  
 
-# 8.2 What Does Setup Mean?
+- 주요 사용된 라이브러리
+  @apollo/client,
+  @fortawesome/fontawesome-svg-core,
+  @fortawesome/free-brands-svg-icons,
+  @fortawesome/free-regular-svg-icons,
+  @fortawesome/free-solid-svg-icons,
+  @fortawesome/react-fontawesome,
+  graphql,
+  react-helmet-async,
+  react-hook-form,
+  react-router-dom,
+  styled-components
 
-- [x] Router
-- [x] Authentication
-- [x] Arch.
-- [x] Styles
-- [ ] Log In / Sign Up
+<br><br>
 
-# 8.3 Router Setup part
+<hr>
+<br><br>
 
-# 8.6 Reactive Variables
+
+# Router Setup part
+
+- react router dom (묻고 따지지도 않고 걍 사용)
+
+<br><br>
+
+<hr>
+<br><br>
+
+# Reactive Variables
 
 - 사용법
 
 1. makeVar를 이용하여 선언
 2. app.tsx파일(최상단 경로)에서 useReactiveVar로 hooks설정해줌
 3. 어디서든 선언된 변수명(설정하고싶은 값)형식으로 사용가능
-<!-- isLoggedInVar(false) -->
 
-- cache 기능등 참고
+- cache 기능 등... 참고
   https://github.com/apollographql/ac3-state-management-examples/tree/master/apollo-local-state/src
 
-# 8.9 GlobalStyles on Styled Components
 
-- apply styled-reset
+<br><br>
+
+<hr>
+<br><br>
+
+# GlobalStyles on Styled Components
+
+- globalStyles를 사용하여 body에 적용될 기본적인 default css를 적용
+- styled-reset을 사용하여 css reset 효과 적용
+
+
+<br><br>
+
+<hr>
+<br><br>
+
 
 # typescript for graphql
 
-- 적용하려면 백엔드가 typescript로 작성돼있어야함
 - npm install -g apollo
   apollo client:codegen
   https://github.com/apollographql/apollo-tooling#apollo-clientcodegen-output 참고
@@ -217,23 +249,38 @@ npm i styled-components react-hook-form react-router-dom @apollo/client graphql 
 apollo client:codegen src/__generated__ --target=typescript --outputFlat
 ```
 
-# 10.1 Login UI Clone (18:40)
 
-- [ ] Feed
-- [ ] Profile
-- [ ] See Hashtag
+<br><br>
 
-# 10.5 Forms in React
+<hr>
+<br><br>
 
-# 10.6 Helmet Component
 
+# Helmet Component
+
+- title및 파싱에 사용될 정보를 추가하여 SEO에 보다 유리하게 함(걍 NEXTJS 사용하자)
 - react helmet 사용법
   https://www.npmjs.com/package/react-helmet
 
-# 10.7 React Hook Form
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+# React Hook Form
 
 - react hook form 사용법
   https://react-hook-form.com/
+
+
+<br><br>
+
+<hr>
+<br><br>
+
 
 # 일반 react form Typescript 적용 예시
 
@@ -270,52 +317,125 @@ apollo client:codegen src/__generated__ --target=typescript --outputFlat
   )
 ```
 
-# 10.9 Apollo Client
 
-- backend와 연결
+<br><br>
 
-# 10.11 Login part Two
+<hr>
+<br><br>
+
+
+
+# Apollo Client
+
+- backend와 연동을 위한 셋업
+- 또한 reactVariable의 persist 적용방법을 학습
+- localStorage에 저장된 token을  http의 header에 저장하고 사용하기위한 설정
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Login part
 
 - useForm과 apollo hook, apollo reactive variable, localStorage등을 이용하여 로그인 상태 관리
 - https://www.youtube.com/watch?v=ZBfBiwyR2HY 참고
 
 - onChange 사용시 react hooks form 이 깨져버리는? 상태 발생
-- setError 사용법 연구 필요
+- setError 사용법 연구 필요(버그일 확률 높음)
 
-# 10.13 Redirecting Users
 
-- useHistory를 이용하여 변수와 함께 push 하고 useLocation이용하여 변수와 함께 props를 받아옴
 
-# 10.14 Dark Mode
+<br><br>
 
-- darkmode세팅
+<hr>
+<br><br>
 
-# 11.0 Header and Layout
+
+# Redirecting Users
+
+- useHistory 이용하여 변수와 함께 push
+- useLocation이용하여 변수와 함께 props를 받아옴
+
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Dark Mode
+
+- themeProvider사용하여 darkmode세팅
+
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Header and Layout
 
 - 로그인 한 상태의 home에서 최상위 레이아웃 설계
 - navigation..
-
-# 11.1 Header part Two
-
 - header 부분 아이콘 추가 및 마무리
-
-# 11.2 Header part Three
-
-- localStorage에 저장된 token을 꺼내다 우리의 http의 header에 넣어서 사용하기위한 설정
 - 사용자가 브라우저에서 전달받은 토큰을 변경하여 장난치면 바로 로그아웃됨
 
-# 11.6 isLiked
 
-- 내가 해당 feed에 like를 했는지 여부
-- like테이블에서 연결된 photoId와 userId를 찾아서 해당조건에 만족하는 like가 있으면 true를 반환하고 없으면 false를 반환한다.
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# isLiked
+
+- login user가 해당 feed에 like를 했는지 여부
+- like 테이블에서 연결된 photoId와 userId를 찾고 해당조건에 만족하는 like가 있으면 true를 반환하고 없으면 false를 반환
+
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
 
 # onClick 으로 Mutation 실행하려면 새로운 함수안에서 호출 하는게 편함
 
-# 11.7 Liking Photos
 
-- like unlike기능인 ToggleLike를 실행
+<br><br>
 
-# 11.8 Refetching Queries
+<hr>
+<br><br>
+
+
+
+# Liking Photos
+
+- like unlike기능인 ToggleLike기능 구현
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Refetching Queries
 
 - updating apollo cache
 - useMutation의 인자중 refetchQueries를 뽑아서 사용
@@ -332,7 +452,15 @@ const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
 - mutation이 완료된 이후 refetchQueries를 실행하여 말그대로 해당쿼리내용을 다시 fetch하는 것
 - 해당 쿼리를 완전히 다시 실행하는것과 동일한 작업이기때문에 좋은 방법은 아님 (귀찮을때 사용)
 
-# 11.9 writeFragment
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# writeFragment
 
 - mutation이후 행동하는 작업중 update를 이용하여 cache를 update해준다
 - update는 백엔드에서 받은 데이터를 주는 function이고
@@ -417,7 +545,15 @@ function Photo({ id, user, file, isLiked, likes }: Props) {
 
 ```
 
-# 11.10 readFragment
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# readFragment
 
 - cache update에서 업데이트하고 싶은(덮어씌울 데이터가 없을때 불러오는 방법)
 - update시 cache에 저장된 데이터를 불러오는 방법
@@ -534,7 +670,16 @@ function Photo({
 
 ```
 
-# 11.13 Parsing Hashtags
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+
+# Parsing Hashtags
 
 - replace witch regex
 - sanitize-html (html문법 보호를 해제)
@@ -571,13 +716,29 @@ function Photo({
   모든 태그에는 html을 허용하는 태그가 존재함 but 매우 위험한 작업이어서 기본적으로 모든 태그를 하드코딩이 아닌 상태로 입력받은경우는 string으로 표현하게 됨
   이 작업을 풀어주는 게 dangerouslySetInnerHTML 설정
 
-# 11.14 Parsing Hashtags part Two
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Parsing Hashtags part Two
 
 - html 허용하는 방식 변경
 
-# 11.15 cache Modify
 
-- apollo v3에서 새로 생긴기능임
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# cache Modify
+
+- apollo v3에서 새로 생긴기능
 - 사용법이 간단하고 변경하려는 cache값의 이전값을 이용하여 간단하게 변경하는 경우 아주 간단하고 유용하게 사용할 수 있음
 - 사용법
 
@@ -680,15 +841,28 @@ function Photo({
 }
 ```
 
-# 11.16 Create Comment part One
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Create Comment
 
 - feed에 댓글다는 기능
+- cache직접 제어
 
-# 11.17 Create Comment part Two
 
-- setValue('payload','');
+<br><br>
 
-# 11.19 Delete Comment
+<hr>
+<br><br>
+
+
+
+# Delete Comment
 
 - cache에 존재하는 comment를 지우는 방법(use evict)
   사용법
@@ -697,16 +871,42 @@ function Photo({
 cache.evict({ id: `Comment:${id}` });
 ```
 
-# 12.0 useParams
+
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# useParams
 
 - react-router-dom을 이용하여 전달받은 params를 쉽게 이용하는 방법
 
-# 12.1 Queries and Fragments
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Queries and Fragments
 
 - 자주 사용하는 쿼리를 모듈화 해서 재사용 하는 방법
   src/fragment와 Profile안의 내용 참조
 
-# 12.2 keyFields
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+
+# keyFields
 
 - 보통은 id를 query로 불러오면 이것을 apollo가 자동으로 인식하여 고유식별자로 인식하고
   cache에 하나의 객체로 저장해주는데
@@ -714,27 +914,35 @@ cache.evict({ id: `Comment:${id}` });
 - 그래서 일련의 규칙으로 고유식별자를 따로 지정해주고 그것을 기준으로 cache에
   따로 나뉘어진 새로운 객체로 저장하게 만들어 주기위해 apollo.tsx에서 InMemoryCache의 typePolicies설정을해준다
 
-# 12.4 Follow Unfollow part One
 
-# 12.6 Follow Unfollow part Four
+
+<br><br>
+
+<hr>
+<br><br>
+
+
+
+# Follow Unfollow
 
 - cache update 시 onComplete방식으로 업데이트 하는 방법 (profile.tsx)
-
-# 12.4 Follow Unfollow part Two
-
-# 12.7 Follow Unfollow part Two
-
 - 내가 follow 한 상대의 cache에서 follower부분을 변경했다면
 - 나의 following의 cache부분도 변경해주는것
+
+
+<br><br>
+
+<hr>
+<br><br>
+
 
 # deploty
 
 공통룰은 NODE_ENV로 설정되는 변수값으로 배포되고있는데 NODE_ENV를 이용하여 백엔드 주소를 설정해준다
 
-# https://docs.netlify.com/routing/redirects/#app 처리해줘야함
+# https://docs.netlify.com/routing/redirects/#app
 
 - redirection시 reactJS로 향하게
--
 
 ```
 _redirects플레인 txt파일을 public폴더에 추가
