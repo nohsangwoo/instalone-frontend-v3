@@ -65,6 +65,11 @@
 - prisma studio로 등록된 회원 확인
 
 
+<br><br>
+
+<hr>
+<br><br>
+
 
 # 로그인
 
@@ -76,10 +81,23 @@
 - 로그인 후 초기 페이지는 Feed
 
 
+<br><br>
 
-# Instaclone Web
+<hr>
+<br><br>
 
-# 8.1 Installing All
+
+# Write a comment(caching on apollo) 7 delete a comment
+
+<br><br>
+![3-comment](./README_IMAGE/comment.gif)
+- comment추가 mutation 실행 후 추가된 comment를 리렌더링 하기위해 refetching 대신 cache를 직접 제어한다
+- cache를 제어하는 경우 DB와 백엔드 서버의 부하를 줄이고 불필요한 자원소모를 방지한다.
+- comment제거 mutation 또한 마찬가지 작업을 진행해준다
+
+
+# Settings up
+# Installing All
 
 - styled components
   https://styled-components.com/
