@@ -119,6 +119,24 @@
 - 리렌더링시 cache가 업데이트된 데이터를 기준으로 리렌더링 된다
 
 
+<br><br>
+
+<hr>
+<br><br>
+
+
+# Profile
+
+
+<br><br>
+![5-profile](./README_IMAGE/profile.gif)
+- instagram의 profile 기능
+- 내 정보의 현황을 제공하는 페이지
+- followers, following, username, my all feeds
+
+
+
+
 
 # Settings up
 # Installing All
