@@ -28,7 +28,7 @@ const PhotoContainer = styled.div`
   border-radius: 4px;
   border: 1px solid ${props => props.theme.borderColor};
   margin-bottom: 60px;
-  max-width: 615px;
+  min-width: 615px;
 `;
 const PhotoHeader = styled.div`
   padding: 15px;
@@ -44,6 +44,9 @@ const Username = styled(FatText)`
 const PhotoFile = styled.img`
   min-width: 100%;
   max-width: 100%;
+  min-height: 50vh;
+  max-height: 50vh;
+  object-fit: cover;
 `;
 
 const PhotoData = styled.div`
@@ -169,7 +172,7 @@ function Photo({
 
   console.log('loading', loading);
 
-  const tpggleLikeFunc = () => {
+  const toggleLikeFunc = () => {
     toggleLikeMutation();
   };
 
@@ -187,7 +190,7 @@ function Photo({
       <PhotoData>
         <PhotoActions>
           <div>
-            <PhotoAction onClick={tpggleLikeFunc}>
+            <PhotoAction onClick={toggleLikeFunc}>
               <FontAwesomeIcon
                 style={{ color: isLiked ? 'tomato' : 'inherit' }}
                 icon={isLiked ? SolidHeart : faHeart}
